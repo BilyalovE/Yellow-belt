@@ -599,41 +599,71 @@ void FuncB(T x) { /*...
 */
 
 // Предварительное объявление шаблонных функций
-template <typename T> vector <T>& Sqr(vector <T>& vec);
-template <typename Key, typename Value> map <Key, Value>& Sqr(map <Key, Value>& m);
+
+//Для вектора
+template <typename T> 
+vector <T>& Sqr(const vector <T>& vec);
+
+// Для словаря
+template <typename Key, typename Value> 
+map <Key, Value>& Sqr(const map <Key, Value>& m);
+
+// Для пары
+template<typename K, typename V> 
+pair<K, V> Sqr(const pair<K, V>& value);
+
+// Для простых типов
+template <typename T> T Sqr(const T);
+
+
 
 // Объявляем шаблонные функции
+// Для простых типов
+template <typename T>
+T Sqr(T x) {
+	return x * x;
+}
 
+//Для вектора
 template <typename T>
 vector <T>& Sqr(vector <T>& vec) {
-	for (auto& item :  vec) {
-		item *= item;
+	vector <T> result;
+	for (const auto& item :  vec) {
+		result.push_back(Sqr(item));
 	}
 	return vec;
 }
 
-template <typename Key, typename Value>
-pair<Key, Value> operator*(const pair<Key, Value>& p1, const pair<Key, Value>& p2) {
-	Key key = p1.first * p2.first;
-	Value value = p1.second * p2.second;
-	return { key, value };
+// Для пары
+template<typename K, typename V>
+pair<K, V> Sqr(const pair<K, V>& p) {
+	return { Sqr(p.first), Sqr(p.second) };
 }
+
+//// Для пары
+//template <typename Key, typename Value>
+//pair<Key, Value> operator*(const pair<Key, Value>& p1, const pair<Key, Value>& p2) {
+//	Key key = p1.first * p2.second;
+//	Value value = p1.second * p2.second;
+//	return { key, value };
+//}
 
 template <typename Key, typename Value>
 map<Key, Value>& Sqr(map<Key, Value>& m) {
-	for (auto [key, value] : m) {
-		m[key] = value * value;
+	map<Key, Value> result;
+	for (const auto [key, value] : m) {
+		result[key] = Sqr(value);
 	}
-	return m;
+	return result;
 }
 
 
 TEST(Week_1, Task_6) {
 	// Пример вызова функции
-	vector<double> v = { 1, 2.5, 3 };
+	vector<pair <int, double>> v = { {1, 1.1}, {2, 2.2} };
 	cout << "vector:";
-	for (double x : Sqr(v)) {
-		cout << ' ' << x;
+	for (const auto& x : Sqr(v)) {
+		cout << ' ' << x.second;
 	}
 	cout << endl;
 

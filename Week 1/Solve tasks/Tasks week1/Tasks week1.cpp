@@ -600,76 +600,123 @@ void FuncB(T x) { /*...
 
 // Предварительное объявление шаблонных функций
 
-//Для вектора
-template <typename T> 
-vector <T>& Sqr(const vector <T>& vec);
-
-// Для словаря
-template <typename Key, typename Value> 
-map <Key, Value>& Sqr(const map <Key, Value>& m);
-
-// Для пары
-template<typename K, typename V> 
-pair<K, V> Sqr(const pair<K, V>& value);
-
-// Для простых типов
-template <typename T> T Sqr(const T);
-
-
-
-// Объявляем шаблонные функции
-// Для простых типов
-template <typename T>
-T Sqr(T x) {
-	return x * x;
-}
-
-//Для вектора
-template <typename T>
-vector <T>& Sqr(vector <T>& vec) {
-	vector <T> result;
-	for (const auto& item :  vec) {
-		result.push_back(Sqr(item));
-	}
-	return vec;
-}
-
-// Для пары
-template<typename K, typename V>
-pair<K, V> Sqr(const pair<K, V>& p) {
-	return { Sqr(p.first), Sqr(p.second) };
-}
-
+////Для вектора
+//template <typename T> 
+//vector <T> Sqr(const vector <T>& vec);
+//
+//
+//// Для словаря
+//template <typename Key, typename Value> 
+//map <Key, Value> Sqr(const map <Key, Value>& m);
+//
 //// Для пары
+//template<typename K, typename V> 
+//pair<K, V> Sqr(const pair<K, V>& value);
+//
+//// Для простых типов
+//template <typename T> T Sqr(const T);
+//
+//
+//
+//// Объявляем шаблонные функции
+//// Для простых типов
+//template <typename T>
+//T Sqr(T x) {
+//	return x * x;
+//}
+//
+////Для вектора
+//template <typename T>
+//vector <T> Sqr(vector <T>& vec) {
+//	vector <T> result;
+//	for (const auto&  item:  vec) {
+//		result.push_back(Sqr(item));
+//	}
+//	return result;
+//}
+//
+//// Для пары
+//template<typename K, typename V>
+//pair<K, V> Sqr(const pair<K, V>& p) {
+//	return { Sqr(p.first), Sqr(p.second) };
+//}
+//
+//
 //template <typename Key, typename Value>
-//pair<Key, Value> operator*(const pair<Key, Value>& p1, const pair<Key, Value>& p2) {
-//	Key key = p1.first * p2.second;
-//	Value value = p1.second * p2.second;
-//	return { key, value };
+//map<Key, Value>& Sqr(map<Key, Value>& m) {
+//	map<Key, Value> result;
+//	for (const auto [key, value] : m) {
+//		result[key] = Sqr(value);
+//	}
+//	return result;
 //}
 
+
+// ВТОРОЙ СПОСОБ - БОЛЕЕ ПРАВИЛЬНЫЙ
+template <typename T> T Sqr(T x);
+
+template <typename T> 
+vector <T> operator*(const vector<T>& v1, const vector<T>& v2);
+
+template <typename Key, typename Value> 
+pair <Key, Value> operator*(const pair<Key, Value>& p1, const pair<Key, Value>& p2);
+
 template <typename Key, typename Value>
-map<Key, Value>& Sqr(map<Key, Value>& m) {
-	map<Key, Value> result;
-	for (const auto [key, value] : m) {
+map <Key, Value> operator*(const map<Key, Value>& m1, const map<Key, Value>& m2);
+
+
+template <typename T>
+vector <T> operator*(const vector<T>& vec1, const vector<T>& vec2) {
+	vector <T> result;
+	for (const auto& item : vec1) {
+		result.push_back(Sqr(item));
+	}
+	return result;
+}
+
+template<typename Key, typename Value>
+pair<Key, Value> operator*(const pair<Key, Value>& p1, const pair<Key, Value>& p2) {
+	Key key = p1.first * p2.first;
+	Value value = p1.second * p2.second;
+	return { key, value };
+}
+
+template <typename Key, typename Value>
+map <Key, Value> operator*(const map<Key, Value>& m1, const map<Key, Value>& m2) {
+	map <Key, Value> result;
+	for (const auto& [key, value] : m1) {
 		result[key] = Sqr(value);
 	}
 	return result;
 }
 
 
+template <typename T>
+T Sqr(T x) {
+	return x * x;
+}
+
+
+
+
 TEST(Week_1, Task_6) {
 	// Пример вызова функции
-	vector<pair <int, double>> v = { {1, 1.1}, {2, 2.2} };
+	//vector<pair <int, double>> v = { {1, 1.1}, {2, 2.2} };
+
+	pair <int, double> p{ 1, 1.1 };
+	cout << "pair:";
+	cout << ' ' << Sqr(p).second;
+	cout << endl;
+	vector <int> v = { 1, 2, 3 };
 	cout << "vector:";
 	for (const auto& x : Sqr(v)) {
-		cout << ' ' << x.second;
+		cout << ' ' << x;
 	}
 	cout << endl;
 
-	map<double, pair<double, int>> map_of_pairs = {
-	  {4.0, {2, 2}},
-	  {7.2, {1.1, 3}}
+	map<int, pair<double, int>> map_of_pairs = {
+	  {4, {2, 2}},
+	  {7, {1.1, 3}}
 	};
 
 	cout << "map of pairs:" << endl;

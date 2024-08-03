@@ -549,3 +549,101 @@ TEST(Week_1, Task_5) {
 	PrintTasksInfo(untouched_tasks);
 	cout << "\n";
 }
+
+/*
+* Задание по программированию: Всё в квадрат
+Реализуйте шаблонную функцию Sqr, которая работает не только для чисел, но и для контейнеров. Функция должна возвращать копию исходного контейнера, модифицировав его следующим образом:
+
+для vector элементы нужно возвести в квадрат;
+для map в квадрат нужно возвести только значения, но не ключи;
+для pair в квадрат нужно возвести каждый элемент пары.
+// Пример вызова функции
+vector<int> v = {1, 2, 3};
+cout << "vector:";
+for (int x : Sqr(v)) {
+  cout << ' ' << x;
+}
+cout << endl;
+
+map<int, pair<int, int>> map_of_pairs = {
+  {4, {2, 2}},
+  {7, {4, 3}}
+};
+cout << "map of pairs:" << endl;
+for (const auto& x : Sqr(map_of_pairs)) {
+  cout << x.first << ' ' << x.second.first << ' ' << x.second.second << endl;
+}
+Код выше должен вывести
+
+vector: 1 4 9
+map of pairs:
+4 4 4
+7 16 9
+Функция должна корректно работать не только для контейнеров, состоящих из чисел, но и для составных объектов, например, векторов словарей пар чисел.
+
+Для успешной сдачи решения необходимо сделать предварительное объявление шаблонных функций перед всеми шаблонными функциями.
+
+Пример предварительного объявления шаблонной функции
+
+// Предварительное объявление шаблонных функций
+template<typename T> T FuncA(T x);
+template<typename T> void FuncB(T x);
+
+// Объявляем шаблонные функции
+template <typename T>
+T FuncA(T x) { /*...*/ //}
+
+/*template <typename T>
+void FuncB(T x) { /*...
+Зачем это нужно и как это работает вы узнаете далее из наших курсов.
+*/
+
+// Предварительное объявление шаблонных функций
+template <typename T> vector <T>& Sqr(vector <T>& vec);
+template <typename Key, typename Value> map <Key, Value>& Sqr(map <Key, Value>& m);
+
+// Объявляем шаблонные функции
+
+template <typename T>
+vector <T>& Sqr(vector <T>& vec) {
+	for (auto& item :  vec) {
+		item *= item;
+	}
+	return vec;
+}
+
+template <typename Key, typename Value>
+pair<Key, Value> operator*(const pair<Key, Value>& p1, const pair<Key, Value>& p2) {
+	Key key = p1.first * p2.first;
+	Value value = p1.second * p2.second;
+	return { key, value };
+}
+
+template <typename Key, typename Value>
+map<Key, Value>& Sqr(map<Key, Value>& m) {
+	for (auto [key, value] : m) {
+		m[key] = value * value;
+	}
+	return m;
+}
+
+
+TEST(Week_1, Task_6) {
+	// Пример вызова функции
+	vector<double> v = { 1, 2.5, 3 };
+	cout << "vector:";
+	for (double x : Sqr(v)) {
+		cout << ' ' << x;
+	}
+	cout << endl;
+
+	map<double, pair<double, int>> map_of_pairs = {
+	  {4.0, {2, 2}},
+	  {7.2, {1.1, 3}}
+	};
+
+	cout << "map of pairs:" << endl;
+	for (const auto& x : Sqr(map_of_pairs)) {
+		cout << x.first << ' ' << x.second.first << ' ' << x.second.second << endl;
+	}
+}

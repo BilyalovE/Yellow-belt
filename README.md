@@ -14,4 +14,8 @@
 
 ## Задачи недели 2
 
-
+* [Декомпозиция программы](https://github.com/BilyalovE/Yellow-belt/blob/main/Week%201/Tasks/Task%20(1).md) 
+* [Тесты для функции](https://github.com/BilyalovE/Yellow-belt/blob/main/Week%201/Tasks/Task%20(2).md)  
+* [Тесты для класса](https://github.com/BilyalovE/Yellow-belt/blob/main/Week%201/Tasks/Task%20(3).md)
+* [Тесты для класса Rational](https://github.com/BilyalovE/Yellow-belt/blob/main/Week%201/Tasks/Task%20(4).md)
+* [Тесты для функции IsPalindrom](https://github.com/BilyalovE/Yellow-belt/blob/main/Week%201/Tasks/Task%20(5).md)

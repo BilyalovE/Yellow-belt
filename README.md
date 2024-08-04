@@ -16,7 +16,7 @@
 * [Ссылка на элемент](https://github.com/BilyalovE/Yellow-belt/blob/main/Week%201/Tasks/Task%20(7).md)
 
 # Неделя 2
-## <a href="h[ttps://disk.yandex.ru/d/5GzRIrluFr6jzA](https://disk.yandex.ru/d/5GzRIrluFr6jzA)" style="color: black">Видеолеции</a>
+## <a href="https://disk.yandex.ru/d/5GzRIrluFr6jzA" style="color: black">Видеолеции</a>
 ## <a href="https://github.com/BilyalovE/Yellow-belt/tree/main/Week%202/Lectures" style="color: black">Конспект лекций</a>
 ## Задачи
 

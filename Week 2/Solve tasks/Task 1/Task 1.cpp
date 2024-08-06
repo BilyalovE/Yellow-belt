@@ -50,6 +50,7 @@ istream& operator >> (istream& is, Query& q) {
     switch (q.type) {
     case QueryType::NEW_BUS:
         is >> q.bus;
+        //////
         int stop_count;
         is >> stop_count;
         q.stops.clear();

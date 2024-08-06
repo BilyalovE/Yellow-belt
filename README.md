@@ -17,7 +17,7 @@
 
 # Неделя 2
 ## <a href="https://disk.yandex.ru/d/5GzRIrluFr6jzA" style="color: black">Видеолеции</a>
-## <a href="https://github.com/BilyalovE/Yellow-belt/tree/main/Week%202/Lectures" style="color: blue">Конспект лекций</a>
+## <a href="https://github.com/BilyalovE/Yellow-belt/tree/main/Week%202/Lectures" style="color: black">Конспект лекций</a>
 ## Задачи
 
 * [Декомпозиция программы](https://github.com/BilyalovE/Yellow-belt/blob/main/Week%202/Tasks/Task%20(1).md) 
